@@ -1,15 +1,20 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
+import dynamic from "next/dynamic"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { PortfolioSidebar } from "@/components/portfolio-sidebar"
 import { SidebarProvider } from "@/components/ui/sidebar"
 import { LanguageProvider } from "@/contexts/language-context"
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
 
 const inter = Inter({ subsets: ["latin"] })
+
+const PortfolioSidebar = dynamic(
+  () => import("@/components/portfolio-sidebar").then((mod) => ({ default: mod.PortfolioSidebar })),
+  { ssr: false }
+)
 
 export const metadata: Metadata = {
   title: "Aditya Fakhri Riansyah | AI-Driven Web Developer",
